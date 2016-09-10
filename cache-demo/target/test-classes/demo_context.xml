@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/cache
+			http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <context:component-scan base-package="com.jiaxy.cache.substitute"/>
+    <context:component-scan base-package="com.jiaxy"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/demo.properties</value>
+                <value>/cache/Hawk.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 默认缓存配置 -->
+    <bean id="defaultPool" class="com.jd.hawk.common.domain.PoolInfo">
+        <property name="maxActive" value="${hawk.pool.maxActive}" />
+        <property name="maxIdle" value="${hawk.pool.maxIdle}" />
+        <property name="maxWait" value="${hawk.pool.maxWait}" />
+        <property name="testOnBorrow" value="${hawk.pool.testOnBorrow}" />
+        <property name="testOnReturn" value="${hawk.pool.testOnReturn}" />
+    </bean>
+
+    <!-- 缓存客户端 -->
+    <bean id="hawkClient" class="com.jd.hawk.client.HawkClient" init-method="init" destroy-method="destroy">
+        <property name="defaultPoolInfo">
+            <ref local="defaultPool"/>
+        </property>
+        <!-- 命名空间 使用HawkClient操做缓存key前缀会自动增加‘_IDE_’字符 -->
+        <property name="namespace" value="_IDE_" />
+        <!-- redis 缓存ip地址  -->
+        <property name="serverInfoList">
+            <list>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server1.ip}" />
+                    <property name="port" value="${hawk.server1.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server2.ip}" />
+                    <property name="port" value="${hawk.server2.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server3.ip}" />
+                    <property name="port" value="${hawk.server3.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server4.ip}" />
+                    <property name="port" value="${hawk.server4.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server5.ip}" />
+                    <property name="port" value="${hawk.server5.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server6.ip}" />
+                    <property name="port" value="${hawk.server6.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server7.ip}" />
+                    <property name="port" value="${hawk.server7.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server8.ip}" />
+                    <property name="port" value="${hawk.server8.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server9.ip}" />
+                    <property name="port" value="${hawk.server9.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server10.ip}" />
+                    <property name="port" value="${hawk.server10.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server11.ip}" />
+                    <property name="port" value="${hawk.server11.port}" />
+                </bean>
+                <bean class="com.jd.hawk.common.domain.ServerInfo">
+                    <property name="ip" value="${hawk.server12.ip}" />
+                    <property name="port" value="${hawk.server12.port}" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

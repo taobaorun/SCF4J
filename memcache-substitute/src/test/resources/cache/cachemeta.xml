@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<caches>
+	<cache name="compass_test" expire="10000" opTimeout="50000" class=""/><!-- expire,opTimeout unit second-->
+	<cache name="compass_dev" expire="0" opTimeout="50000"/>
+</caches>
